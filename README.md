@@ -2,8 +2,7 @@
 
 This repository contains the replication code for the paper
 **"Why Artificial Intelligence is not a Salient Issue: Politicizing AI Reduces
-Mobilization Potential"** by G. Battiston, F. Boffa, E. Levi, A. Parmigiani and
-S. Stillman.
+Mobilization Potential"**.
 
 ## The paper in brief
 
