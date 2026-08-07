@@ -2,7 +2,7 @@ set more off
 clear
 clear frames
 
-cd "/home/eugenio/Dropbox/political_economy_techchange/data/follow-up/"
+cd "$root/follow-up/"
 
 use dataset, replace
 
