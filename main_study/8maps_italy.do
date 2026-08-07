@@ -3,7 +3,7 @@ clear
 clear frames
 set scheme white_tableau
 
-cd "/home/eugenio/Dropbox/political_economy_techchange/data/main_survey/"
+cd "$root/main_survey/"
 
 ********************************************************************************
 * 8maps_italy.do
