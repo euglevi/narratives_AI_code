@@ -2,7 +2,7 @@ set more off
 clear
 clear frames
 
-cd "/home/eugenio/Dropbox/political_economy_techchange/data/main_survey/"
+cd "$root/main_survey/"
 
 * This Stata script:
 * 1. Imports survey data from CSV files for Italy, Germany, and US
