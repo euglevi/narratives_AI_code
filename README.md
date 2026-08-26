@@ -96,7 +96,7 @@ global run_followup 1
 
 On a second run, set `install_packages` and `build_palette` to 0. To re-estimate a single script, set both `run_` toggles to 0 and call it directly — `dataset.dta` persists, so preparation need not be repeated.
 
-Approximate runtime on a modern laptop: preparation ≈ 5 minutes, full pipeline ≈ 40 minutes, dominated by the `wyoung` permutation procedure in `3policies.do` and the `mlogit` / `margins` loops in `5hetsignatures.do`.
+Approximate runtime on a modern laptop: preparation ≈ 5 minutes, full pipeline ≈ 10 minutes.
 
 ---
 
