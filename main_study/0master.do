@@ -57,7 +57,6 @@ do "$code/main_study/4signatures.do"
 do "$code/main_study/5hetsignatures.do"
 do "$code/main_study/6robustness_cntry.do"
 do "$code/main_study/7robustness_inattentive.do"
-do "$code/main_study/8maps_italy.do"
 do "$code/main_study/summary_table.do"
 }
 

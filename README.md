@@ -25,9 +25,7 @@ narratives_AI_code/
 │   ├── 5hetsignatures.do             Petition signing: heterogeneity
 │   ├── 6robustness_cntry.do          Country-by-country replication
 │   ├── 7robustness_inattentive.do    Attention-filter robustness
-│   ├── 8maps_italy.do                Italian regional choropleths
 │   ├── summary_table.do              Sample characteristics table
-│   └── times.do                      Survey duration diagnostics
 └── follow_up/
     ├── 1prepare_dataset.do           Import and link the follow-up wave
     └── 2descriptive_stats.do         Follow-up figures
@@ -68,7 +66,6 @@ Raw survey exports are **not** included in this repository. The scripts expect t
 │   ├── italy/final-2024-10-31.csv
 │   ├── germany/final-2024-10-31.csv
 │   ├── us/final-2024-11-06.csv
-│   └── italy/PageTimes-2024-10-14_morning.csv
 └── follow-up/
     └── italy/all_apps_wide-2025-01-13_final.csv
 ```
@@ -141,18 +138,10 @@ Re-runs the core exhibits separately for `US`, `DE` and `IT` to show the pooled 
 Same exercise splitting on attentiveness (`inattentive = mistakes <= 2`) and on the separate attention-check item. Suffixes are `inattentive` and `attention_check`, so they do not clash with the country suffixes from script 6.
 
 
-### `main_study/8maps_italy.do`
-
-Weighted regional means for the Italian sample, drawn with `spmap` over a shapefile converted by `shp2dta`.
-
-
 ### `main_study/summary_table.do`
 
 Sample characteristics by country and overall, written manually with `file write` as a complete `table` environment labelled `tab:summary`. Output: `tables/summary_table.tex`. 
 
-### `main_study/times.do`
-
-Computes completion time per respondent from the oTree page-time exports, used to document median survey length and inform the speeding checks. Console output only; not called by `0master.do`.
 
 ### `follow_up/1prepare_dataset.do`
 

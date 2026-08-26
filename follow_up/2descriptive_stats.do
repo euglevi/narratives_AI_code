@@ -28,16 +28,6 @@ foreach v of varlist m_universal_incom m_tax_credits_inn m_stronger_regula ///
     kwallis `v', by(d_treat)
 }
 
-* political preferences
-
-catcibar l_party_for_worker*, over(d_treat) xlabel(, labsize(small)) ///
-    colors(baseline optimistic balanced pessimistic) legend(position(6) rows(1))
-graph export "./graphs_tables/party_worker.png", replace width(2000)
-
-catcibar l_party_for_ai*, over(d_treat) xlabel(, labsize(small)) ///
-    colors(baseline optimistic balanced pessimistic) legend(position(6) rows(1))
-graph export "./graphs_tables/party_ai.png", replace width(2000)
-
 * beliefs
 
 catcibar l_b_most_com*, over(m_d_sharing_inn) ///
@@ -56,19 +46,3 @@ catcibar political_corr happiness anger fear, over(narr_emotion) xlabel(, ///
     region(lstyle(foreground)) size(small) title("statement seen", size(small)) ///
     position(6) rows(1))
 graph export "./graphs_tables/emotions.png", replace width(2000)
-
-* disaggregated by prior beliefs
-
-catcibar l_b_most_com*, over(m_d_expectation) ///
-    colors(baseline optimistic balanced pessimistic) ///
-    legend(order(1 "do not know" 2 "optimistic" 3 "balanced" 4 "pessimistic") ///
-    size(small))
-graph export "./graphs_tables/falseconsensus_by_expectation.png", ///
-    replace width(1000)
-
-catcibar political_corr happiness anger fear, over(narr_emotion) ///
-    by(m_d_expectation) xlabel(, labsize(small)) ///
-    colors(optimistic balanced pessimistic) ///
-    legend(order(1 "optimistic" 2 "balanced" 3 "pessimistic"))
-graph export "./graphs_tables/emotions_by_expectation.png", ///
-    replace width(2000)
