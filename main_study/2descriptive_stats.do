@@ -224,6 +224,7 @@ graph export "./graphs/appendix_beliefs.png", replace width(2000)
 frame copy default balance, replace
 frame change balance
 
+drop d_gender_* d_education_* d_employment_* 
 tab d_gender, gen(d_gender_)
 tab d_education, gen(d_education_)
 tab occupation, gen(occupation_)

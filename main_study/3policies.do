@@ -13,7 +13,7 @@ global controls under35 over65 i.d_gender i.d_education i.occupation ///
 * T: TABLE WITH TESTS ON POLICIES
 
 recode targ (0.5 = 1)
-recode redistr (0.25 0.75 = 1)
+recode redistr (0.25 0.5 0.75 = 1)
 collect clear
 collect create table_policies
 
@@ -376,6 +376,8 @@ graph export "./graphs/regression_policies.png", replace width(2000)
 
 * T: figure on main regression with prior beliefs as additional controls
 
+frame change default
+
 foreach v of varlist policy_intervention arg_labour arg_againstinn ///
     arg_proinn higher_taxes_on targ redistr education_polic tax_credits_inn {
     reg `v' i.d_treat $controls i.d_expectation
@@ -436,6 +438,8 @@ graph export "./graphs/regression_policies_beliefs.png", replace width(2000)
 
 * T: figure on main regression with alternative weights
 
+frame change default
+
 foreach v of varlist policy_intervention arg_labour arg_againstinn ///
     arg_proinn higher_taxes_on targ redistr education_polic tax_credits_inn {
     reg `v' i.d_treat $controls [pw = weight_alt]
@@ -495,6 +499,8 @@ graph export "./graphs/regression_policies_weights.png", replace width(2000)
 
 
 * T: own job loss
+
+frame change default
 
 reg job_loss_chance i.d_treat $controls
 

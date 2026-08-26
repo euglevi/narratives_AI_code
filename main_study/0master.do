@@ -11,7 +11,7 @@ version 18
 * code: folder containing main_study/ and follow_up/ (this repository)
 * root: folder containing main_survey/ and follow-up/ (the data)
 
-global code "/home/eugenio/git/narratives_AI_code"
+global code "/home/eugenio/github_projects/narratives_AI_code"
 global root "/home/eugenio/Dropbox/political_economy_techchange/data"
 
 * TOGGLES
