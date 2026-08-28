@@ -127,58 +127,53 @@ grc1leg2 "policy_intervention" "arg_labour" "arg_againstinn" "arg_proinn", ///
 graph export "./graphs/heterogeneity_prior_beliefs.png", replace width(1000)
 
 
-* T: heterogeneity by voting
+* T: heterogeneity by political orientation
 foreach v of varlist policy_intervention arg_labour arg_againstinn ///
     arg_proinn {
-    reg `v' ib2.d_voting##i.d_treat i.d_expectation $controls
+    reg `v' i.d_lr_scale##i.d_treat i.d_expectation $controls
     parmest, frame(d_voting, replace) idstr(d_voting) label
     
     local z: variable label `v'
     
     frame change d_voting
     
-    keep if ustrrpos(parm, "d_treat") != 0 | ustrrpos(parm, "d_voting") != 0
+    keep if ustrrpos(parm, "d_treat") != 0 | ustrrpos(parm, "d_lr_scale") != 0
     drop if ustrrpos(parm, "1b") != 0
-    drop if ustrrpos(parm, "2b") != 0
-    drop if ustrrpos(parm, "5.d_voting") != 0
+    drop if ustrrpos(parm, "0b") != 0
     
     gen order = _n - 3 if ustrrpos(parm, "d_treat") != 0
     sort order
-    sort parm in 4/15
+    sort parm in 4/11
     
-    replace estimate = round(estimate, 0.001) if (parm == "1.d_voting" | ///
-        parm == "3.d_voting" | parm == "4.d_voting")
-    local levels "1 3 4"
+    replace estimate = round(estimate, 0.001) if (parm == "2.d_lr_scale" | ///
+        parm == "1.d_lr_scale")
+    local levels "1 2"
     foreach l of local levels {
-        sum estimate if parm == "`l'.d_voting"
+        sum estimate if parm == "`l'.d_lr_scale"
         local m_`l' = r(mean)
-        sum p if parm == "`l'.d_voting"
+        sum p if parm == "`l'.d_lr_scale"
         local temp = r(mean)
         if `temp' < 0.01 {
-            local s_`l' "***"
-        }
-        else if `temp' < 0.05 {
             local s_`l' "**"
         }
-        else if `temp' < 0.1 {
+        else if `temp' < 0.05 {
             local s_`l' "*"
         }
         else {
             local s_`l' ""
         }
     }
-    drop if (parm == "1.d_voting" | parm == "3.d_voting" | parm == "4.d_voting")
+    drop if (parm == "2.d_lr_scale" | parm == "3.d_lr_scale" | ///
+        parm == "1.d_lr_scale")
     
     gen id = _N - _n + 1
     
     gen order2 = 0
-    replace order2 = 1 if ustrrpos(parm, "d_voting") == 0
-    replace order2 = 2 if ustrrpos(parm, "1.d_voting") != 0
-    replace order2 = 3 if ustrrpos(parm, "3.d_voting") != 0
-    replace order2 = 4 if ustrrpos(parm, "4.d_voting") != 0
+    replace order2 = 1 if ustrrpos(parm, "1.d_lr_scale") != 0
+    replace order2 = 2 if ustrrpos(parm, "d_lr_scale") == 0
     
     local i = 1
-    forvalues l = 3 2 to 1 {
+    forvalues l = 1/2 {
         replace id = id + `i' if order2 == `l'
         local i = `i' + 1
     }
@@ -192,19 +187,19 @@ foreach v of varlist policy_intervention arg_labour arg_againstinn ///
         "3.d_treat") != 0, color(balanced)) (scatter id estimate if ustrrpos(parm, ///
         "4.d_treat") != 0, color(pessimistic)), xline(0) ///
         legend(order(1 "optimistic" 2 "balanced" 3 "pessimistic") rows(1) ///
-        position(6) size(vsmall)) ytitle(" ") xlabel(, labsize(vsmall)) ///
-        ylabel(2 `""far-right" "[`m_4']`s_4'""' 6 `""center-right" "[`m_3']`s_3'""' ///
-        10 `""far-left" "[`m_1']`s_1'""' 14 "main effects", labsize(vsmall)) ///
-        ysize(7) xsize(6) subtitle("`z'", size(small) box bexpand bcolor(gs13)) ///
-        saving(`v', replace) // -.2(0.05).2
+        position(6) region(lstyle(foreground)) title("statement seen", size(vsmall)) ///
+        size(vsmall)) ytitle(" ") xlabel(, labsize(vsmall)) ///
+        ylabel(2 `""right" "[`m_2']`s_2'""' 6 `""left" "[`m_1']`s_1'""' 10 ///
+        "main effects", labsize(vsmall)) ysize(7) xsize(6) subtitle("`z'", ///
+        size(small) box bexpand bcolor(gs13)) saving(`v', replace) // -.2(0.05).2
+*     graph export "./graphs/het_`v'.png", replace width(1000)
     
     frame change default
 }
 
 grc1leg2 "policy_intervention" "arg_labour" "arg_againstinn" "arg_proinn", ///
     xcommon ysize(8) xsize(7)
-
-graph export "./graphs/heterogeneity_voting.png", replace width(1000)
+graph export "./graphs/heterogeneity_orientation.png", replace width(1000)
 
 
 * T: heterogeneity by characteristics 
