@@ -6,9 +6,7 @@ os.chdir(
     "/home/eugenio/Dropbox/political_economy_techchange/data/main_survey/lda_arguments/"
 )
 
-client = OpenAI(
-    api_key="XXX"
-)
+client = OpenAI()
 
 
 def format_message(role, content):

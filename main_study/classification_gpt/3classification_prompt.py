@@ -7,7 +7,6 @@ os.chdir(
 )
 
 client = OpenAI(
-    api_key="xxx"
 )
 
 
