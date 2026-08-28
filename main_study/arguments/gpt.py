@@ -6,8 +6,7 @@ os.chdir(
     "/home/eugenio/Dropbox/political_economy_techchange/data/main_survey/lda_arguments/"
 )
 
-client = OpenAI()
-
+# you need to create the client with your API key
 
 def format_message(role, content):
     return {"role": role, "content": content}
